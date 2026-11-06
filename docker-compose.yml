@@ -1,0 +1,21 @@
+services:
+  pixelforge:
+    build: .
+    image: pixelforge:latest
+    container_name: pixelforge
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./weights:/app/weights    # model weights persist (auto-downloaded once)
+      - ./gfpgan:/app/gfpgan      # GFPGAN/facexlib weight cache (first face job)
+      - ./outputs:/app/outputs    # upscaled results
+      - ./uploads:/app/uploads
+    # GPU access (requires NVIDIA Container Toolkit on the host)
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    restart: unless-stopped

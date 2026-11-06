@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.git/
+weights/*.pth
+weights/*.downloading
+uploads/*
+!uploads/.gitkeep
+outputs/*
+!outputs/.gitkeep
+uv.lock
